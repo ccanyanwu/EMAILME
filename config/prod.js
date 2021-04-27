@@ -11,6 +11,6 @@ module.exports = {
     "857955165608-52b1ml7vndnl4vjcb17pt8e9qdn1k6nd.apps.googleusercontent.com",
   googleClientSecret: "1mfyBZGMmfDaAk_LNENrtbpg",
   mongoURI:
-    "mongodb+srv://emailme:emailme@emailme.tnxio.mongodb.net/EMAILME?retryWrites=true&w=majority",
+    "mongodb+srv://FRESH:FRESH@fresh.t1l4i.mongodb.net/FRESH?retryWrites=true&w=majority",
   cookieKey: "tg83uiynftj4uvklfh vlgjgbnjbhngjbng",
 };
