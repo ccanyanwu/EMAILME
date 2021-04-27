@@ -10,6 +10,9 @@ var config = {};
 // config.DBHOST = "manifestdbinstance.cgq0reqixqsd.us-east-1.rds.amazonaws.com";
 config.PORT = process.env.PORT || 5000;
 
+//857955165608-52b1ml7vndnl4vjcb17pt8e9qdn1k6nd.apps.googleusercontent.com
+//1mfyBZGMmfDaAk_LNENrtbpg
+
 /* config.WEBSITE_URL = "https:localhost:5678";
 config.USER_MODULE_API_URL =
   "https://rhck9sk8bh.execute-api.us-east-1.amazonaws.com/userModuleDevAPI3";
