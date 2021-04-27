@@ -15,11 +15,21 @@ var bodyParser = require("body-parser");
 var routes = require("./routes/routes");
 
 //connect to database
-mongoose.connect(keys.mongoURI, {
+/* mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-}).catch(error => console.log(error));
+}).catch(error => console.log(error)); */
 
+(async () => {
+  try {
+    await mongoose.connect(keys.mongoURI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+  } catch (err) {
+    console.log("error: " + err);
+  }
+})();
 const app = express();
 
 app.use(
