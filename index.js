@@ -1,5 +1,6 @@
 var config = require("./config");
 const express = require("express");
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -9,10 +10,10 @@ const keys = require('./config/keys');
 //google auth
 require('./modules/passport');
 const authRoute = require('./routes/authRoutes');
+const billingRoute = require("./routes/billingRoutes");
+
 
 var cors = require("cors");
-var bodyParser = require("body-parser");
-var routes = require("./routes/routes");
 
 //connect to database
 /* mongoose.connect(keys.mongoURI, {
@@ -30,7 +31,14 @@ var routes = require("./routes/routes");
     console.log("error: " + err);
   }
 })();
+
 const app = express();
+
+/***********
+PARSE JSON
+**********/
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cookieSession({
@@ -43,17 +51,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-/***********
-PARSE JSON
-**********/
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 app.use(cors({ origin: true }));
 
-//google auth
+//using our routes
 authRoute(app);
+billingRoute(app);
+
+//production routes
+if (process.env.NODE_ENV === 'production') {
+  //express serve up production assets like main.js & main.css file
+  app.use(express.static('client/build'));
+
+  //express will serve up the index.html file if it doesn't recognize the route
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.listen(config.PORT, "0.0.0.0",  () => {
   console.log(`Server running on ${config.PORT}...`);
