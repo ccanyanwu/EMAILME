@@ -4,13 +4,16 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-require('./models/User')
+require('./models/User');
+require("./models/Survey");
+
 const keys = require('./config/keys');
 
 //google auth
 require('./modules/passport');
 const authRoute = require('./routes/authRoutes');
 const billingRoute = require("./routes/billingRoutes");
+const surveyRoute = require('./routes/surveyRoutes');
 
 
 var cors = require("cors");
@@ -59,6 +62,7 @@ app.use(cors({ origin: true }));
 //using our routes
 authRoute(app);
 billingRoute(app);
+surveyRoute(app);
 
 //production routes
 if (process.env.NODE_ENV === 'production') {
